@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store/redux-persist-config';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import CreateEmployee from './pages/CreateEmployee';
+import EmployeeList from './pages/EmployeeList';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<CreateEmployee />} />
+            <Route path="/employee_list" element={<EmployeeList />} />
+            <Route path="*" element={<h1>Not Found</h1>} />
+          </Routes>
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 

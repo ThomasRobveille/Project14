@@ -1,0 +1,23 @@
+.containerEmployeeList{
+  display: flex;
+  flex-direction: column;
+}
+
+.arrayList{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.arrayHeader li{
+  font-weight: bold;
+}
+
+.arrayList li{
+  list-style: none;
+  width: 300px;
+  margin: auto;
+}
