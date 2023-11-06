@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../store/modalSlice';
 
 import statesData from '../data/states.json';
@@ -13,15 +13,16 @@ import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
 export default function FormNewEmployee() {
+  const [count, setCount] = useState(0);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
-  const [state, setState] = useState('');
   const [zip, setZip] = useState('');
-  const [departement, setDepartement] = useState('');
   const [selectedDateofBirth, setSelectedDateofBirth] = useState(new Date());
   const [selectedDateofStart, setSelectedDateofStart] = useState(new Date());
+  const state = useSelector(state => state.dropdown.infoDropdown.state);
+  const departement = useSelector(state => state.dropdown.infoDropdown.department);
 
   const handleDateofBirthChange = (date) => {
     setSelectedDateofBirth(date);
@@ -56,18 +57,39 @@ export default function FormNewEmployee() {
     case 'city':
       setCity(e.target.value);
       break;
-    case 'state':
-      setState(e.target.value);
-      break;
     case 'zip':
       setZip(e.target.value);
-      break;
-    case 'departement':
-      setDepartement(e.target.value);
       break;
     default:
       break;
     }
+  }
+
+  const saveNewEmployee = () => {   
+    const newEmployee = {
+      firstname: firstname,
+      lastname: lastname,
+      date_of_birth: selectedDateofBirth,
+      date_of_start: selectedDateofStart,
+      adress: {
+        street: street,
+        city: city,
+        state: state,
+        zip: zip,
+      },
+      departement: departement,
+    }
+    console.log(newEmployee)
+    if(!localStorage.getItem('count')) {
+      localStorage.setItem('count', 0);
+    } else {
+      setCount(parseInt(localStorage.getItem('count')));
+    }
+    let idEmployee = "Employee" + count
+    localStorage.setItem(idEmployee, JSON.stringify(newEmployee));
+    localStorage.setItem('count', count + 1);
+    setCount(count + 1);
+    handleOpenModal();
   }
 
   const handleOpenModal = () => {
@@ -99,7 +121,7 @@ export default function FormNewEmployee() {
         <label>Departement</label>
         <Dropdown data={salesData} type={"departement"}/>
       </form>
-      <button onClick={() => handleOpenModal()}>SAVE</button>
+      <button onClick={() => saveNewEmployee()}>SAVE</button>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { closeModal } from '../store/modalSlice';
 import '../stylesheet/Modal.css'
 
 function Modal() {
-  const isOpen = useSelector(state => state.modal.open);
+  const isOpen = useSelector(state => state.modal.modal.open);
 
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ function Modal() {
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={() => handleCloseModal()}>&times;</span>
-            <p>Bonjour je suis une modal</p>
+            <p>Utilisateur créer avec succès</p>
           </div>
         </div>
       ) : null}
