@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+## FR
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description :
 
-## Available Scripts
+Voici le projet HRnet, 14ème projet de la formation Openclassroom "Développeur d'application - Javascript React"
 
-In the project directory, you can run:
+L'objectif de ce projet est la convertion d'un porjet jQuery en React. Le projet original dispose de 4 plugins jQuery et il est demandé d'en convertir un pour en faire un package npm. Les autres ont simplement besoin d'être remplacé par du code React ou être des plugins npm externe.
 
-### `npm start`
+## Installation :
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Cloner le repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- https://github.com/ThomasRobveille/Project14.git
 
-### `npm test`
+2. Installer toutes les dépendances pour le front-end:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-   `npm install` ou `yarn`
 
-### `npm run build`
+3. Lancer le front-end:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   `npm start` ou `yarn start`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Développé avec :
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-   [Visual Studio Code](https://code.visualstudio.com/) - Éditeur de texte
+-   [React 18](https://fr.reactjs.org/) - Bibliothèque JavaScript libre développée par Facebook
+-   [React Router V6](https://reactrouter.com/) - Bibliothèque de routage pour React
+-   [Redux](https://redux.js.org/) - Bibliothèque JS de gestion d'état pour applications web
+-   [GitHub](https://github.com/) - Outil de gestion de versions
 
-### `npm run eject`
+## Auteur :
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Thomas Robveille** : [**GitHub**](https://github.com/ThomasRobveille/)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## EN
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Description :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This is the HRnet project, the 14th project in the Openclassroom "Application Developer - Javascript React" training program.
 
-## Learn More
+The aim of this project is to convert a jQuery porject into React. The original project has 4 jQuery plugins, and we're asking you to convert one of them into an npm package. The others simply need to be replaced by React code or be external npm plugins.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Installation :
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the repository:
 
-### Code Splitting
+- https://github.com/ThomasRobveille/Project14.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Install all front-end dependencies:
 
-### Analyzing the Bundle Size
+- `npm install` or `yarn`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Launch the front-end:
 
-### Making a Progressive Web App
+- `npm start` or `yarn start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Develop with :
 
-### Advanced Configuration
+- [Visual Studio Code](https://code.visualstudio.com/) - Text editor
+- [React 18](https://fr.reactjs.org/) - Free JavaScript library developed by Facebook
+- [React Router V6](https://reactrouter.com/) - Routing library for React
+- [Redux](https://redux.js.org/) - JS state management library for web applications
+- [GitHub](https://github.com/) - Version management tool
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Autor :
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Thomas Robveille** : [**GitHub**](https://github.com/ThomasRobveille/)
