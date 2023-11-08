@@ -39,6 +39,17 @@ export default function EmployeeArray() {
     setData(paginatedData);
   }
 
+  const handleSortBy = (type) => {
+    const employees = localStorage.getItem('employeeData');
+    const data = JSON.parse(employees);
+    const sortedData = data.sort((a, b) => {
+      if(a[type] < b[type]) { return -1; }
+      if(a[type] > b[type]) { return 1; }
+      return 0;
+    })
+    setData(sortedData);
+  }
+
 
   return (
     <div className='containerEmployeeList'>
@@ -58,15 +69,15 @@ export default function EmployeeArray() {
         
       </div>
       <ul className='arrayList arrayHeader'>
-        <li>FirstName</li>
-        <li>LastName</li>
-        <li>StartDate</li>
-        <li>Department</li>
-        <li>Date of birth</li>
-        <li>Street</li>
-        <li>City</li>
-        <li>State</li>
-        <li>Zip</li>
+        <li onClick={() => handleSortBy('firstname')}>FirstName</li>
+        <li onClick={() => handleSortBy('lastname')}>LastName</li>
+        <li onClick={() => handleSortBy('startdate')}>StartDate</li>
+        <li onClick={() => handleSortBy('department')}>Department</li>
+        <li onClick={() => handleSortBy('dateofbirth')}>Date of birth</li>
+        <li onClick={() => handleSortBy('street')}>Street</li>
+        <li onClick={() => handleSortBy('city')}>City</li>
+        <li onClick={() => handleSortBy('state')}>State</li>
+        <li onClick={() => handleSortBy('zip')}>Zip</li>
       </ul>
       {
         data.map((employee, index) => (
