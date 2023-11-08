@@ -3,6 +3,16 @@
   flex-direction: column;
 }
 
+.searchtoolsEmployeeList{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+
+}
+
 .arrayList{
   width: 80%;
   margin: auto;
@@ -20,4 +30,7 @@
   list-style: none;
   width: 300px;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

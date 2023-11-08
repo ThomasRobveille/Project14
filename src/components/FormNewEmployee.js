@@ -79,16 +79,18 @@ export default function FormNewEmployee() {
       },
       departement: departement,
     }
-    console.log(newEmployee)
-    if(!localStorage.getItem('count')) {
-      localStorage.setItem('count', 0);
+    
+    /* CODE TEMPORAIRE - A RETIRER SUR PROD */
+    let employeeData = [];
+    if (localStorage.getItem('employeeData')) {
+      employeeData = JSON.parse(localStorage.getItem('employeeData'));
     } else {
-      setCount(parseInt(localStorage.getItem('count')));
+      employeeData = [];
     }
-    let idEmployee = "Employee" + count
-    localStorage.setItem(idEmployee, JSON.stringify(newEmployee));
-    localStorage.setItem('count', count + 1);
-    setCount(count + 1);
+    employeeData.push(newEmployee);
+    localStorage.setItem('employeeData', JSON.stringify(employeeData));
+    /* FIN CODE TEMPORAIRE */
+
     handleOpenModal();
   }
 
