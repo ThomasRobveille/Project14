@@ -13,7 +13,6 @@ import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
 export default function FormNewEmployee() {
-  const [count, setCount] = useState(0);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [street, setStreet] = useState('');
@@ -66,6 +65,10 @@ export default function FormNewEmployee() {
   }
 
   const saveNewEmployee = () => {   
+    if(firstname === '' || lastname === '' || street === '' || city === '' || zip === '' || state === 'Choisir un état' || departement === 'Choisir un département') {
+      alert('Veuillez remplir tous les champs');
+      return;
+    }
     const newEmployee = {
       firstname: firstname,
       lastname: lastname,
@@ -102,9 +105,9 @@ export default function FormNewEmployee() {
     <div className='containerFormNewEmployee'>
       <form>
         <label>Firstname</label>
-        <input type="text" name="firstname" onChange={handleInputChange}/>
+        <input type="text" name="firstname" className='inputFormNewEmployee' onChange={handleInputChange}/>
         <label>Lastname</label>
-        <input type="text" name="lastname" onChange={handleInputChange}/>
+        <input type="text" name="lastname" className='inputFormNewEmployee' onChange={handleInputChange}/>
         <label>Date of birth</label>
         <DatePicker name='date_of_birth' onChange={handleDateofBirthChange} value={selectedDateofBirth} />
         <label>Date of start</label>
@@ -112,18 +115,18 @@ export default function FormNewEmployee() {
         <div className='formAdress'>
           <h2>Adress</h2>
           <label>Street</label>
-          <input type="text" name="street" onChange={handleInputChange}/>
+          <input type="text" name="street" className='inputFormNewEmployee' onChange={handleInputChange}/>
           <label>City</label>
-          <input type="text" name="city" onChange={handleInputChange}/>
+          <input type="text" name="city" className='inputFormNewEmployee' onChange={handleInputChange}/>
           <label>State</label>
           <Dropdown data={statesData} type={"state"}/>
           <label>Zip</label>
-          <input type="text" name="zip" onChange={handleInputChange}/>
+          <input type="text" name="zip" className='inputFormNewEmployee' onChange={handleInputChange}/>
         </div>
         <label>Departement</label>
         <Dropdown data={salesData} type={"departement"}/>
       </form>
-      <button onClick={() => saveNewEmployee()}>SAVE</button>
+      <button className='submitBtnFormNewEmployee' onClick={() => saveNewEmployee()}>SAVE</button>
     </div>
   )
 }

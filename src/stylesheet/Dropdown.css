@@ -13,8 +13,14 @@
 }
 
 .active{
+  width: 295px;
   height: 300px;
   overflow: scroll;
+  padding: 20px;
+}
+
+.optionDropdowwn{
+  margin: 10px;
 }
 
 .dropdownIcon{

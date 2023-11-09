@@ -12,6 +12,11 @@ form{
   align-items: center;
 }
 
+.inputFormNewEmployee{
+  width: 295px;
+  height: 50px;
+}
+
 .formAdress{
   display: flex;
   flex-direction: column;
@@ -21,4 +26,20 @@ form{
 
 button{
   margin: 10px 0;
+}
+
+/* react-date-picker */
+
+.react-date-picker{
+  width: 295px;
+}
+
+/* FIN */
+
+.submitBtnFormNewEmployee{
+  width: 295px;
+  height: 50px;
+  background: rgb(16, 172, 55);
+  color: white;
+  border: none;
 }

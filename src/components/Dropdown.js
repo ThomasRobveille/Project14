@@ -33,7 +33,7 @@ export default function Dropdown({data, type}) {
         <span onClick={handleDropdown}><img className='dropdownIcon' alt="flèche dropdown" src={dropdownIcon}/></span>
       </div>
       {data.map((item, index) => (
-        <p key={index} onClick={() => handleDropdownChange(item.name)}>{item.name}</p>
+        <p className='optionDropdown' key={index} onClick={() => handleDropdownChange(item.name)}>{item.name}</p>
       ))}
     </div>
   )
