@@ -6,6 +6,8 @@ import Header from '../components/Header';
 import FormNewEmployee from '../components/FormNewEmployee';
 import Modal from '../components/Modal';
 
+//import { Modal } from 'modal_thomas_robveille';
+
 export default function CreateEmployee() {
   return (
     <Provider store={store}>
