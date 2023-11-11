@@ -19,7 +19,12 @@
   padding: 20px;
 }
 
-.optionDropdowwn{
+.optionDropdown{
+  display: none;
+}
+
+.activeOption{
+  display: block;
   margin: 10px;
 }
 

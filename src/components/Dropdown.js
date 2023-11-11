@@ -12,6 +12,10 @@ export default function Dropdown({data, type}) {
   const handleDropdown = () => {   
     let Dropdown = document.getElementById(id);
     Dropdown.classList.toggle('active');
+    let dropdownOptions = document.getElementsByClassName('optionDropdown');
+    for(let i = 0; i < dropdownOptions.length; i++) {
+      dropdownOptions[i].classList.toggle('activeOption');
+    }
   }
 
   const dispatch = useDispatch();
