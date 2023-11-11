@@ -4,15 +4,18 @@ import "../stylesheet/EmployeeList.css"
 
 export default function EmployeeArray() {
   const [data, setData] = useState([]);
+  const [totalPages, setTotalPages] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [employeesPerPage, setEmployeesPerPage] = useState(5); // [5, 10, 15]
+  const [totalEmployees, setTotalEmployees] = useState(0);
 
   useEffect(() => {
-    const employees = localStorage.getItem('employeeData');
+    handlePage(currentPage, employeesPerPage)
+  }, []);
 
-    if(employees) {
-      const data = JSON.parse(employees);
-      console.log(data)
-      setData(data);
-    }
+  useEffect(() => {
+    const totalEmployees = localStorage.getItem('employeeData');
+    setTotalEmployees(totalEmployees.length);
   }, []);
 
   const handleSearchBar = () => {
@@ -33,21 +36,76 @@ export default function EmployeeArray() {
 
   const handlePagination = () => {
     let pagination = document.getElementById('pagination');
+    setEmployeesPerPage(parseInt(pagination.value));
+    handlePage(currentPage, parseInt(pagination.value));
+  }
+
+  const handlePage = (page, perPage) => {
     const employees = localStorage.getItem('employeeData');
     const data = JSON.parse(employees);
-    const paginatedData = data.slice(0, pagination.value);
+    let startRange = perPage * (page - 1);
+    let endRange = startRange + perPage;
+    const paginatedData = data.slice(startRange , endRange);
     setData(paginatedData);
+    let totalPages = Math.ceil(data.length / 5);
+    let pages = Array.from({length: totalPages}, (v, i) => i + 1);
+    setTotalPages(pages);
+    setCurrentPage(page);
+  }
+
+  const previousPage = () => {
+    if(currentPage === 1) return;
+    const employees = localStorage.getItem('employeeData');
+    const data = JSON.parse(employees);
+    let startRange = employeesPerPage * (currentPage - 2);
+    let endRange = startRange + 5;
+    const paginatedData = data.slice(startRange , endRange);
+    setData(paginatedData);
+    setCurrentPage(currentPage - 1);
+  }
+
+  const nextPage = () => {
+    if(currentPage === totalPages.length) return;
+    const employees = localStorage.getItem('employeeData');
+    const data = JSON.parse(employees);
+    let startRange = employeesPerPage * (currentPage);
+    let endRange = startRange + 5;
+    const paginatedData = data.slice(startRange , endRange);
+    setData(paginatedData);
+    setCurrentPage(currentPage + 1);
   }
 
   const handleSortBy = (type) => {
-    const employees = localStorage.getItem('employeeData');
-    const data = JSON.parse(employees);
-    const sortedData = data.sort((a, b) => {
-      if(a[type] < b[type]) { return -1; }
-      if(a[type] > b[type]) { return 1; }
-      return 0;
-    })
-    setData(sortedData);
+    if(type === "street" || type === "city" || type === "state" || type === "zip") {
+      const employees = localStorage.getItem('employeeData');
+      const data = JSON.parse(employees);
+      const dataToBeSort = data.sort((a, b) => {
+        if(a.adress[type] > b.adress[type]) return 1;
+        if(a.adress[type] < b.adress[type]) return -1;
+        return 0;
+      })
+      setData(dataToBeSort);
+      return;
+    } else if(type === "date_of_birth" || type === "date_of_start") {
+      const employees = localStorage.getItem('employeeData');
+      const data = JSON.parse(employees);
+      const dataToBeSort = data.sort((a, b) => {
+        if(a[type] > b[type]) return 1;
+        if(a[type] < b[type]) return -1;
+        return 0;
+      })
+      setData(dataToBeSort);
+      return;
+    } else {
+      const employees = localStorage.getItem('employeeData');
+      const data = JSON.parse(employees);
+      const dataToBeSort = data.sort((a, b) => {
+        if(a[type] > b[type]) return 1;
+        if(a[type] < b[type]) return -1;
+        return 0;
+      })
+      setData(dataToBeSort);
+    }
   }
 
 
@@ -56,10 +114,10 @@ export default function EmployeeArray() {
       <div className='searchtoolsEmployeeList'>
         <div>
           <label>Show : </label>
-          <select id='pagination' onChange={handlePagination}>
-            <option>1</option>
-            <option>2</option>
-            <option selected>3</option>
+          <select id='pagination' onChange={() => handlePagination()} defaultValue={5}>
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
           </select>
         </div>        
         <div>
@@ -94,6 +152,18 @@ export default function EmployeeArray() {
           </ul>
         ))
       }
+      <div className='pagination'>
+        <p>Showing {currentPage} of {totalPages.length} of {totalEmployees} entries</p>
+        <div>
+          <button onClick={() => previousPage()}>Previous</button>
+          {
+            totalPages.map((page, index) => (
+              <button onClick={() => handlePage(page, employeesPerPage)} key={index}>{page}</button>
+            ))
+          }
+          <button onClick={() => nextPage()}>Next</button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../store/modalSlice';
 
@@ -23,6 +23,16 @@ export default function FormNewEmployee() {
   const state = useSelector(state => state.dropdown.infoDropdown.state);
   const departement = useSelector(state => state.dropdown.infoDropdown.department);
 
+  useEffect(() => {
+    let containerModal = document.getElementById('containerModal');
+    containerModal.style.display = 'none';
+  }, []);
+
+  const openModal = () => {
+    let containerModal = document.getElementById('containerModal');
+    containerModal.style.display = 'block';
+  }
+
   const handleDateofBirthChange = (date) => {
     setSelectedDateofBirth(date);
   };
@@ -35,11 +45,9 @@ export default function FormNewEmployee() {
     {"name": "Marketing"},
     {"name": "Sales"},
     {"name": "Engineering"},
-    {"name": "Human_Resources"},
+    {"name": "Human Resources"},
     {"name": "Legal"},
   ]
-
-  const dispatch = useDispatch();
 
   const handleInputChange = (e, date) => {
     const inputName = e.target.name;
@@ -92,13 +100,13 @@ export default function FormNewEmployee() {
     }
     employeeData.push(newEmployee);
     localStorage.setItem('employeeData', JSON.stringify(employeeData));
-    /* FIN CODE TEMPORAIRE */
+    /* FIN CODE TEMPORAIRE */    
 
     handleOpenModal();
   }
 
   const handleOpenModal = () => {
-    return dispatch(openModal());
+    return openModal();
   }
 
   return (

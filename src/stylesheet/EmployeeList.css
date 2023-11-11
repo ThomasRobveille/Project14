@@ -41,3 +41,11 @@ header{
   justify-content: center;
   align-items: center;
 }
+
+.pagination{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
