@@ -2,22 +2,64 @@ import React, { useState, useEffect } from 'react';
 
 import "../stylesheet/EmployeeList.css"
 
+/**
+ * Composant pour afficher une liste paginée et triable des employés.
+ * @component
+ */
+
 export default function EmployeeArray() {
+  /**
+   * État pour stocker les données des employés.
+   * @type {Array}
+   */
+
   const [data, setData] = useState([]);
+
+  /**
+   * État pour stocker le nombre total de pages.
+   * @type {Array}
+   */
   const [totalPages, setTotalPages] = useState([]);
+
+  /**
+   * État pour stocker la page actuelle.
+   * @type {number}
+   */
   const [currentPage, setCurrentPage] = useState(1);
+
+  /**
+   * État pour stocker le nombre d'employés par page.
+   * @type {number}
+   */
   const [employeesPerPage, setEmployeesPerPage] = useState(5); // [5, 10, 15]
+
+  /**
+   * État pour stocker le nombre total d'employés.
+   * @type {number}
+   */
   const [totalEmployees, setTotalEmployees] = useState(0);
 
+  /**
+   * Effet pour initialiser la page lors du chargement du composant.
+   * @function
+   */
   useEffect(() => {
     handlePage(currentPage, employeesPerPage)
   }, []);
 
+  /**
+   * Effet pour mettre à jour le nombre total d'employés lors du chargement du composant.
+   * @function
+   */
   useEffect(() => {
     const totalEmployees = localStorage.getItem('employeeData');
     setTotalEmployees(totalEmployees.length);
   }, []);
 
+  /**
+   * Gère la barre de recherche des employés.
+   * @function
+   */
   const handleSearchBar = () => {
     let searchBar = document.getElementById('searchBar');
     if(searchBar.value.length > 3) {
@@ -34,12 +76,22 @@ export default function EmployeeArray() {
     }
   }
 
+  /**
+   * Gère la pagination en changeant le nombre d'employés par page.
+   * @function
+   */
   const handlePagination = () => {
     let pagination = document.getElementById('pagination');
     setEmployeesPerPage(parseInt(pagination.value));
     handlePage(currentPage, parseInt(pagination.value));
   }
 
+    /**
+   * Gère le changement de page.
+   * @function
+   * @param {number} page - Numéro de la page à afficher.
+   * @param {number} perPage - Nombre d'employés par page.
+   */
   const handlePage = (page, perPage) => {
     const employees = localStorage.getItem('employeeData');
     const data = JSON.parse(employees);
@@ -75,6 +127,11 @@ export default function EmployeeArray() {
     setCurrentPage(currentPage + 1);
   }
 
+  /**
+   * Gère le tri des employés en fonction d'un type spécifié.
+   * @function
+   * @param {string} type - Type de tri (par exemple, 'street', 'city', 'state', 'zip').
+   */
   const handleSortBy = (type) => {
     if(type === "street" || type === "city" || type === "state" || type === "zip") {
       const employees = localStorage.getItem('employeeData');

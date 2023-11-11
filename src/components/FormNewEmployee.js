@@ -12,6 +12,11 @@ import "../stylesheet/FormNewEmployee.css"
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
+/**
+ * Composant de formulaire pour ajouter un nouvel employé.
+ * @component
+ */
+
 export default function FormNewEmployee() {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -23,19 +28,41 @@ export default function FormNewEmployee() {
   const state = useSelector(state => state.dropdown.infoDropdown.state);
   const departement = useSelector(state => state.dropdown.infoDropdown.department);
 
+  /**
+   * Utilisation de l'effet pour cacher le conteneur modal à l'initialisation.
+   * @function
+   */
+
   useEffect(() => {
     let containerModal = document.getElementById('containerModal');
     containerModal.style.display = 'none';
   }, []);
+
+  /**
+   * Fonction pour ouvrir le modal.
+   * @function
+   */
 
   const openModal = () => {
     let containerModal = document.getElementById('containerModal');
     containerModal.style.display = 'block';
   }
 
+  /**
+   * Gère le changement de date de naissance.
+   * @function
+   * @param {Date} date - Nouvelle date de naissance sélectionnée.
+   */
+
   const handleDateofBirthChange = (date) => {
     setSelectedDateofBirth(date);
   };
+
+  /**
+   * Gère le changement de date de début de contrat.
+   * @function
+   * @param {Date} date - Nouvelle date de début sélectionnée.
+   */
 
   const handleDateofStartChange = (date) => {
     setSelectedDateofStart(date);
@@ -49,7 +76,13 @@ export default function FormNewEmployee() {
     {"name": "Legal"},
   ]
 
-  const handleInputChange = (e, date) => {
+  /**
+   * Gère le changement de saisie dans les champs de formulaire.
+   * @function
+   * @param {Object} e - Événement de changement de saisie.
+   */
+
+  const handleInputChange = (e) => {
     const inputName = e.target.name;
     switch(inputName) {
     case 'firstname':
@@ -71,6 +104,11 @@ export default function FormNewEmployee() {
       break;
     }
   }
+
+    /**
+   * Sauvegarde les informations du nouvel employé.
+   * @function
+   */
 
   const saveNewEmployee = () => {   
     if(firstname === '' || lastname === '' || street === '' || city === '' || zip === '' || state === 'Choisir un état' || departement === 'Choisir un département') {
@@ -102,11 +140,7 @@ export default function FormNewEmployee() {
     localStorage.setItem('employeeData', JSON.stringify(employeeData));
     /* FIN CODE TEMPORAIRE */    
 
-    handleOpenModal();
-  }
-
-  const handleOpenModal = () => {
-    return openModal();
+    openModal();
   }
 
   return (

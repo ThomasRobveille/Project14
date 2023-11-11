@@ -5,10 +5,31 @@ import { changeState, changeDepartment } from '../store/dropdownSlice';
 import "../stylesheet/Dropdown.css"
 import dropdownIcon from '../assets/icon/dropdownIcon.png';
 
+
+/**
+ * Composant Dropdown réutilisable pour afficher une liste d'options.
+ * @component
+ * @param {Object} props - Propriétés du composant.
+ * @param {Array} props.data - Tableau de données à afficher dans le dropdown.
+ * @param {string} props.type - Type de dropdown ('state' ou 'departement').
+ */
 export default function Dropdown({data, type}) {
+  /**
+   * État pour stocker la valeur sélectionnée dans le dropdown.
+   * @type {string}
+   */
   const [departement, setDepartement] = useState('Choisir un département');
 
+  /**
+   * ID du container du dropdown.
+   * @type {string}
+   */
   const id = type + 'containerDropdown';
+
+  /**
+   * Gère l'ouverture/fermeture du dropdown.
+   * @function
+   */
   const handleDropdown = () => {   
     let Dropdown = document.getElementById(id);
     Dropdown.classList.toggle('active');
@@ -18,8 +39,12 @@ export default function Dropdown({data, type}) {
     }
   }
 
+  /**
+   * Dispatch une action Redux pour changer l'état ou le département.
+   * @function
+   * @param {string} item - Valeur sélectionnée dans le dropdown.
+   */
   const dispatch = useDispatch();
-
   const handleDropdownChange = (item) => {
     if (type === 'state') {
       dispatch(changeState(item));
