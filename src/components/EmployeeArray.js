@@ -39,6 +39,8 @@ export default function EmployeeArray() {
    */
   const [totalEmployees, setTotalEmployees] = useState(0);
 
+  const [typeSortBy, setTypeSortBy] = useState('');
+
   /**
    * Effet pour initialiser la page lors du chargement du composant.
    * @function
@@ -99,8 +101,11 @@ export default function EmployeeArray() {
     let endRange = startRange + perPage;
     const paginatedData = data.slice(startRange , endRange);
     setData(paginatedData);
-    let totalPages = Math.ceil(data.length / 5);
-    let pages = Array.from({length: totalPages}, (v, i) => i + 1);
+    let totalPages = Math.ceil(data.length / perPage);
+    let pages = [];
+    for(let i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }    
     setTotalPages(pages);
     setCurrentPage(page);
   }
@@ -134,18 +139,26 @@ export default function EmployeeArray() {
    */
   const handleSortBy = (type) => {
     if(type === "street" || type === "city" || type === "state" || type === "zip") {
-      const employees = localStorage.getItem('employeeData');
-      const data = JSON.parse(employees);
-      const dataToBeSort = data.sort((a, b) => {
-        if(a.adress[type] > b.adress[type]) return 1;
-        if(a.adress[type] < b.adress[type]) return -1;
-        return 0;
-      })
-      setData(dataToBeSort);
-      return;
+      if(typeSortBy === type) {
+        const dataToBeSort = data.reverse((a, b) => {
+          if(a.adress[type] > b.adress[type]) return 1;
+          if(a.adress[type] < b.adress[type]) return -1;
+          return 0;
+        })
+        setData(dataToBeSort);
+        setTypeSortBy('inversed' + type);
+        return;
+      } else {
+        const dataToBeSort = data.sort((a, b) => {
+          if(a.adress[type] > b.adress[type]) return 1;
+          if(a.adress[type] < b.adress[type]) return -1;
+          return 0;
+        })
+        setData(dataToBeSort);
+        setTypeSortBy(type);
+        return;
+      }
     } else if(type === "date_of_birth" || type === "date_of_start") {
-      const employees = localStorage.getItem('employeeData');
-      const data = JSON.parse(employees);
       const dataToBeSort = data.sort((a, b) => {
         if(a[type] > b[type]) return 1;
         if(a[type] < b[type]) return -1;
@@ -154,14 +167,25 @@ export default function EmployeeArray() {
       setData(dataToBeSort);
       return;
     } else {
-      const employees = localStorage.getItem('employeeData');
-      const data = JSON.parse(employees);
-      const dataToBeSort = data.sort((a, b) => {
-        if(a[type] > b[type]) return 1;
-        if(a[type] < b[type]) return -1;
-        return 0;
-      })
-      setData(dataToBeSort);
+      if(typeSortBy === type) {
+        const dataToBeSort = data.reverse((a, b) => {
+          if(a[type] > b[type]) return 1;
+          if(a[type] < b[type]) return -1;
+          return 0;
+        })
+        setData(dataToBeSort);
+        setTypeSortBy('inversed' + type);
+        return;
+      } else {
+        const dataToBeSort = data.sort((a, b) => {
+          if(a[type] > b[type]) return 1;
+          if(a[type] < b[type]) return -1;
+          return 0;
+        })
+        setData(dataToBeSort);
+        setTypeSortBy(type);
+        return;
+      }
     }
   }
 
